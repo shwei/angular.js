@@ -465,15 +465,15 @@ var formDirectiveFactory = function(isNgForm) {
               // IE 9 is not affected because it doesn't fire a submit event and try to do a full
               // page reload if the form was destroyed by submission of the form via a click handler
               // on a button in the form. Looks like an IE9 specific bug.
+	      // 
+	      // Checking event.preventDefault and calling event.returnValue were removed. 
               var handleFormSubmission = function(event) {
                 scope.$apply(function() {
                   controller.$commitViewValue();
                   controller.$setSubmitted();
                 });
 
-                event.preventDefault
-                  ? event.preventDefault()
-                  : event.returnValue = false; // IE
+                event.preventDefault();
               };
 
               addEventListenerFn(formElement[0], 'submit', handleFormSubmission);
